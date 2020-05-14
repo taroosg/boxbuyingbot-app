@@ -1,7 +1,11 @@
 import React from 'react';
-import ItemList from './components/ItemList';
-import InputForm from './components/InputForm';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+import { AuthProvider } from './contexts/auth';
+
+import Router from './components/Router';
+import Signin from './pages/Signin';
+import Main from './pages/Main';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -22,8 +26,12 @@ const App = () => {
     <MuiThemeProvider
       theme={darkTheme}
     >
-      <InputForm />
-      <ItemList />
+      <AuthProvider>
+        <Router
+          renderMain={() => <Main />}
+          renderSignin={() => <Signin />}
+        />
+      </AuthProvider>
     </MuiThemeProvider>
   );
 }

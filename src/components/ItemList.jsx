@@ -55,7 +55,6 @@ const ItemList = props => {
   }, [])
   return (
     <div>
-
       <ul>
         {
           itemListData?.map((x, index) =>
