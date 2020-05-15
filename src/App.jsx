@@ -2,6 +2,7 @@ import React from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import { AuthProvider } from './contexts/auth';
+import './App.css';
 
 import Router from './components/Router';
 import Signin from './pages/Signin';

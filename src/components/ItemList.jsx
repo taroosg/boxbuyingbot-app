@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import CakeIcon from '@material-ui/icons/Cake';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import axios from 'axios';
 import Loading from './Loading';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    maxWidth: 752,
+    overflow: 'hidden',
+  },
+  demo: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    margin: theme.spacing(4, 0, 2),
+  },
+}));
+
 const ItemList = props => {
+  const classes = useStyles();
+
   const [itemListData, setItemListData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  // モーダル管理
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
 
   // 全件取得関数
   const getDataFromAPI = async () => {
@@ -54,22 +72,44 @@ const ItemList = props => {
     const result = getDataFromAPI?.().then(response => setItemListData(response.data));
   }, [])
   return (
-    <div>
-      <ul>
+    <div className={classes.root}>
+      <List>
         {
           itemListData?.map((x, index) =>
-            <li key={index}>
-              <p>{x.data.name}</p>
-              <p>{x.data.url}</p>
-              <p onClick={() => {
-                if (window.confirm('Delete item??')) {
-                  deleteData(index, x.id)
-                }
-              }}>delete</p>
-            </li>
+            <ListItem key={index}>
+              <ListItemAvatar>
+                <Avatar>
+                  <CakeIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <Link
+                href={x.data.url}
+                target="_blank"
+                color="inherit"
+                rel="noopener"
+              >
+                <ListItemText
+                  primary={x.data.name}
+                  secondary={x.data.url}
+                />
+              </Link>
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    if (window.confirm('Delete item??')) {
+                      deleteData(index, x.id)
+                    }
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
           )
         }
-      </ul>
+      </List>
       {
         !isLoading
           ? ''

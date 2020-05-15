@@ -1,5 +1,12 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -12,7 +19,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.App-main {
+  background-color: #282c34;
+  width: 100vw;
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  flex: 1;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  overflow: scroll;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

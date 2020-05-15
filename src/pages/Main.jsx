@@ -3,17 +3,20 @@ import Header from '../components/Header';
 import InputForm from '../components/InputForm';
 import ItemList from '../components/ItemList';
 import { AuthContext } from '../contexts/auth'
+import SimpleModal from '../components/SimpleModal';
 
 const Main = props => {
   const { currentUser } = useContext(AuthContext)
 
   return (
-    <div>
+    <div className="App">
       <Header />
       {
         currentUser.uid === process.env.REACT_APP_CURRNTUSER_UID
-          ? <div>
-            <InputForm />
+          ? <div className="App-main">
+            <SimpleModal>
+              <InputForm />
+            </SimpleModal>
             <ItemList />
           </div>
           : ''

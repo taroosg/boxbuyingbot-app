@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+
 import axios from 'axios';
 import Loading from './Loading';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
+
 const InputForm = props => {
+  const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('')
   const [url, setUrl] = useState('')
@@ -27,31 +43,65 @@ const InputForm = props => {
 
   return (
     <div>
-      <form action="">
-        <ul>
-          <li>
-            <label htmlFor="name">name</label>
-            <input
-              type="text"
-              id="name"
+      <form
+        className={classes.root}
+        // noValidate
+        autoComplete="off"
+      >
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid
+            item
+            xs={12}
+            spacing={3}
+          >
+            <TextField
+              required
+              id="standard-required"
+              label="Name"
+              defaultValue=""
               value={name}
               onChange={e => { setName(e.target.value) }}
             />
-          </li>
-          <li>
-            <label htmlFor="url">url</label>
-            <input
-              type="text"
-              id="url"
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            spacing={3}
+          >
+            <TextField
+              required
+              id="standard-required"
+              label="URL"
+              defaultValue=""
               value={url}
               onChange={e => { setUrl(e.target.value) }}
             />
-          </li>
-          <button
-            type="button"
-            onClick={() => { sendNewDataToServer(name, url) }}
-          >submit</button>
-        </ul>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            spacing={3}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => { sendNewDataToServer(name, url) }}
+            >
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+
+        {/* <button
+          type="button"
+          onClick={() => { sendNewDataToServer(name, url) }}
+        >submit</button> */}
       </form>
       {
         !isLoading
