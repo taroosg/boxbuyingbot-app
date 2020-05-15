@@ -22,7 +22,7 @@
 .App-main {
   background-color: #282c34;
   width: 100vw;
-  /* max-width: 1280px; */
+  max-width: 752px;
   margin: 0 auto;
   flex: 1;
   font-size: calc(10px + 2vmin);
