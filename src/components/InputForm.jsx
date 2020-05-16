@@ -35,6 +35,8 @@ const InputForm = props => {
       url: url,
     }
     const result = await axios.post(requestUrl, postdata);
+    const newItemListData = [result.data, ...props.itemListData];
+    props.setItemListData(newItemListData);
     alert('Saved Successfly!');
     setName('');
     setUrl('');

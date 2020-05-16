@@ -14,9 +14,9 @@ const Main = props => {
       {
         currentUser.uid === process.env.REACT_APP_CURRNTUSER_UID
           ? <div className="App-main">
-            <SimpleModal>
+            {/* <SimpleModal>
               <InputForm />
-            </SimpleModal>
+            </SimpleModal> */}
             <ItemList />
           </div>
           : ''

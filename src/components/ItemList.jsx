@@ -13,6 +13,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import axios from 'axios';
 import Loading from './Loading';
+import InputForm from '../components/InputForm';
+import SimpleModal from '../components/SimpleModal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -111,6 +113,15 @@ const ItemList = props => {
         }
       </List>
       {
+        <SimpleModal>
+          <InputForm
+            itemListData={itemListData}
+            setItemListData={setItemListData}
+          />
+        </SimpleModal>
+      }
+      {
+
         !isLoading
           ? ''
           : <Loading
